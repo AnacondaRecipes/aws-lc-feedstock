@@ -17,9 +17,9 @@ requirements:
     - cmake
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - {{ compiler('go') }}
     - ninja-base
   host:
-    - go 1.22.9
     - perl {{ perl }}
     - openssl {{ openssl }}
 
@@ -30,6 +30,7 @@ test:
 
 about:
   home: https://github.com/aws/aws-lc
+  license_family: Apache
   license: Apache-2.0
   license_file: LICENSE
   summary: "AWS-LC is AWS's fork of BoringSSL, providing a cryptographic library."
