@@ -1,0 +1,42 @@
+{% set name = "aws-lc" %}
+{% set version = "1.48.2" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/aws/aws-lc/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: f4019163ea9a09040db21b4822241f2b169a5ab5d22dd9cdd8c2f81574f1a9db
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - cmake
+    - {{ compiler('c') }}
+    - ninja-base
+  host:
+    - go 1.22.9
+    - perl {{ perl }}
+    - openssl {{ openssl }}
+
+test:
+  commands:
+    - test -f $PREFIX/lib/libcrypto${SHLIB_EXT}  # [unix]
+    - if not exist %PREFIX%\\Library\\bin\\libcrypto.dll exit 1  # [win]
+
+about:
+  home: https://github.com/aws/aws-lc
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: "AWS-LC is AWS's fork of BoringSSL, providing a cryptographic library."
+  description: |
+    AWS-LC is a fork of BoringSSL tailored for use within AWS products.
+    It supplies the cryptographic primitives (e.g. libcrypto.a) needed by components like s2n.
+    This recipe builds and installs the AWS-LC library.
+
+extra:
+  recipe-maintainers:
+    - ELundby45
