@@ -28,7 +28,7 @@ requirements:
 test:
   commands:
     - test -f $PREFIX/lib/libcrypto${SHLIB_EXT}  # [unix]
-    - if not exist %PREFIX%\\Library\\bin\\libcrypto.dll exit 1  # [win]
+    - if not exist %PREFIX%\\Library\\lib\\crypto.dll exit 1  # [win]
 
 about:
   home: https://github.com/aws/aws-lc
