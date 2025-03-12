@@ -20,6 +20,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('go') }}
     - ninja-base
+    - nasm  # [win]
   host:
     - perl {{ perl }}
     - openssl {{ openssl }}
