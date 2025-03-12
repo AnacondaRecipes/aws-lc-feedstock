@@ -16,6 +16,7 @@ requirements:
   build:
     - cmake
     - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - ninja-base
   host:
     - go 1.22.9
@@ -36,6 +37,8 @@ about:
     AWS-LC is a fork of BoringSSL tailored for use within AWS products.
     It supplies the cryptographic primitives (e.g. libcrypto.a) needed by components like s2n.
     This recipe builds and installs the AWS-LC library.
+  dev_url: https://github.com/aws/aws-lc
+  doc_url: https://github.com/aws/aws-lc
 
 extra:
   recipe-maintainers:
