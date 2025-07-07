@@ -1,0 +1,51 @@
+{% set name = "aws-lc" %}
+{% set version = "1.55.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/aws/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: a216e5e572ad9f68e6b93666f0bbca4d7792f400ca525731583196c139c12ce9
+
+build:
+  number: 0
+  run_exports:
+    - {{ pin_subpackage("aws-lc", max_pin="x.x.x") }}
+
+requirements:
+  build:
+    - cmake >=3.5
+    - {{ compiler('c') }}
+    - ninja-base
+    - perl {{ perl }}
+    - {{ go_compiler }}
+    - pkgconfig  # [linux]
+
+test:
+  commands:
+    - test -f $PREFIX/lib/libssl${SHLIB_EXT}  # [unix]
+    - test -f $PREFIX/lib/libcrypto${SHLIB_EXT}  # [unix]
+    - test -f ${PREFIX}/include/openssl/ssl.h  # [unix]
+    - if not exist %PREFIX%\\Library\\bin\\libssl.dll exit 1  # [win]
+    - if not exist %PREFIX%\\Library\\bin\\libcrypto.dll exit 1  # [win]
+    - if not exist %PREFIX%\\Library\\include\\openssl\\ssl.h exit 1  # [win]
+
+about:
+  home: https://github.com/aws/aws-lc
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE
+  summary: AWS-LC is a general-purpose cryptographic library maintained by the AWS Cryptography team for AWS and their customers.
+    It іs based on code from the Google BoringSSL project and the OpenSSL project.
+  description: AWS-LC is a general-purpose cryptographic library maintained by the AWS Cryptography team for AWS and their customers.
+    It іs based on code from the Google BoringSSL project and the OpenSSL project.
+    AWS-LC contains portable C implementations of algorithms needed for TLS and common applications.
+    For performance critical algorithms, optimized assembly versions are included for x86 and ARM.
+  dev_url: https://github.com/aws/aws-lc
+  doc_url: https://github.com/aws/aws-lc
+
+extra:
+  recipe-maintainers:
+    - PatrykKups
