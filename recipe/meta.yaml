@@ -18,9 +18,11 @@ requirements:
   build:
     - cmake >=3.5
     - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - ninja-base
     - perl {{ perl }}
     - {{ go_compiler }}
+    - nasm  # [win]
     - pkgconfig  # [linux]
 
 test:
